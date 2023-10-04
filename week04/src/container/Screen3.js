@@ -7,28 +7,67 @@ import React, { useState, useEffect } from 'react';
 export default function Screen3() {
 
     const [dataselect, setdataselect] = useState([
-        { id: 1, value: 'Include lower case letters', checked: false },
-        { id: 2, value: 'Include upcase letters', checked: false },
-        { id: 3, value: 'Include number', checked: false },
-        { id: 4, value: 'Include special symbol', checked: false },
+        { id: 1, value: 'Include lower case letters', checked: false ,chart:'abcdefghijklmnopqrstuvwxyz'},
+        { id: 2, value: 'Include upcase letters', checked: false ,chart:'ABCDEFGHIJKLMNOPQRSTUVWXYZ'},
+        { id: 3, value: 'Include number', checked: false ,chart:'0123456789'},
+        { id: 4, value: 'Include special symbol', checked: false ,chart:'!@#$%^&*()_+-=[]{}|;:,.<>?'},
 
-    ])
+    ]);
+
+    const [datacheck,setdatacheck] = useState([]);
+
+    const [datapassword,setdatapassword] = useState('');
+
+    const [datalenght,setdatalength] = useState('');
+
 
     const handleCheckSelect = (id) => {
         let temp = dataselect.map((item) => {
             if (id === item.id) {
-                return { ...item, checked: !item.checked };
+                let update = { ...item, checked: !item.checked };
+                
+                return update;
             }
             return item;
         });
         setdataselect(temp)
+
     }
+
+   
 
     const handlebtnclick = () => {
-        alert('check click')
+        if(!datacheck || !datalenght){
+            alert('Bạn vui lòng nhập thông tin');
+        }else{
+        let length = datalenght;
+        let result = '';
+        let characters = '';
+        let checkselect = dataselect.filter((item) => item.checked);
+        if(checkselect){
+            for(let i = 0;i<checkselect.length;i++){
+                characters += checkselect[i].chart;
+            }
+        }
+        const charactersLength = characters.length;
+        let counter = 0;
+        while (counter < length) {
+        result += characters.charAt(Math.floor(Math.random() * charactersLength));
+        counter += 1;
+        }
+        if(result){
+            setdatapassword(result)
+        }
+        }
+        
     }
 
-    console.log('check dataselect', dataselect)
+    const handleOnchange = (newText) =>{
+        setdatalength(newText)
+    }
+
+    console.log('check datacheck',datacheck)
+
 
 
     return (
@@ -38,12 +77,12 @@ export default function Screen3() {
                     <Text style={styles.text1}>PASSWORD GENERATOR</Text>
                 </View>
                 <View style={styles.layout2}>
-                    <TextInput style={styles.inputpassword} />
+                    <TextInput style={styles.inputpassword} value={datapassword}/>
                 </View>
                 <View style={styles.layout3}>
                     <View style={styles.layouttext1}>
                         <Text style={styles.text2}>Password length</Text>
-                        <TextInput style={styles.inputpasswordlenght} />
+                        <TextInput style={styles.inputpasswordlenght} defaultValue={datalenght} onChangeText={(newText) => handleOnchange(newText)}/>
                     </View>
                     {
                         dataselect.map((item, index) => {
