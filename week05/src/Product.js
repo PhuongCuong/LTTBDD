@@ -3,8 +3,20 @@ import { StyleSheet, Text, View, Image, Pressable } from 'react-native';
 import { useState, useEffect } from 'react';
 
 
+const objcolor = [
+  { img: require('../assets/vs_black.png'), textcolor: "đen", id: 1 },
+  { img: require('../assets/vs_blue.png'), textcolor: "xanh dương", id: 2 },
+  { img: require('../assets/vs_red.png'), textcolor: "đỏ", id: 3 },
+  { img: require('../assets/vs_silver.png'), textcolor: "trắng", id: 4 },
+]
 
-export default function Product() {
+
+export default function Product({ navigation }) {
+
+  const [setcolor, datasetcolor] = useState({
+    img: require('../assets/vs_black.png'), textcolor: "đen", id: 1
+  });
+
   const [dataimg, setdataimg] = useState([
     { img: require('../assets/star.png') },
     { img: require('../assets/star.png') },
@@ -12,10 +24,14 @@ export default function Product() {
     { img: require('../assets/star.png') },
     { img: require('../assets/star.png') }
   ])
+
+  console.log('check datacolor', setcolor)
+
+
   return (
     <View style={styles.container}>
       <View style={styles.layout1}>
-        <Image style={styles.bgImg} source={require('../assets/vs_black.png')} />
+        <Image style={styles.bgImg} source={setcolor.img} />
       </View>
       <View style={styles.layoutText}>
         <Text style={styles.textproduct}>Điện Thoại Vsmart Joy 3 - Hàng chính hãng</Text>
@@ -42,7 +58,9 @@ export default function Product() {
         </View>
       </View>
       <View style={styles.layout2}>
-        <Pressable style={styles.btntop}>
+        <Pressable style={styles.btntop}
+          onPress={() => navigation.navigate('Color', { setcolor, datasetcolor })}
+        >
           <Text style={styles.textColor}>
             4 MÀU-CHỌN MÀU
           </Text>
@@ -64,6 +82,9 @@ export default function Product() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: '#fff',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
 
   layout1: {
@@ -151,8 +172,8 @@ const styles = StyleSheet.create({
   },
 
   bgImg: {
-    width: 301,
-    height: 361,
+    width: 250,
+    height: 300,
   },
 
   bgImgStart: {
