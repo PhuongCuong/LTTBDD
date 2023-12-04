@@ -10,16 +10,16 @@ export default function App() {
   return (
     <View style={styles.container}>
       {/* <Screen1/> */}
-      {/* <Screen3/> */}
-      {/* <Screen2/> */}
-      {/* <Screen4/> */}
-      <Screen5/>
-      
+      {/* <Screen3 /> */}
+      {/* <Screen2 /> */}
+      {/* <Screen4 /> */}
+      <Screen5 />
+
     </View>
 
   );
 
-  
+
 }
 
 const styles = StyleSheet.create({

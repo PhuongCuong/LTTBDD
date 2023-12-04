@@ -6,8 +6,8 @@ import Screen1 from './src/container/Screen1';
 export default function App() {
   return (
     <View style={styles.container}>
-      {/* <Screen3 /> */}
-      <Screen1/>
+      <Screen3 />
+      {/* <Screen1/> */}
     </View>
   );
 }

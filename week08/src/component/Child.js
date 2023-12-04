@@ -24,11 +24,6 @@ const Child = (props) => {
 
     }
 
-    useEffect(() => {
-        dispatch(fetchData()).unwrap();
-    }, [])
-
-
     return (
         <>
             {
